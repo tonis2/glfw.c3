@@ -1,0 +1,1 @@
+zip ./glfw.c3l ./glfw.c3 ./manifest.json
