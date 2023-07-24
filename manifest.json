@@ -5,7 +5,7 @@
         "linked-libraries": ["glfw"]
     },
     "linux-x64" : {
-        "linked-libraries": ["glfw"]
+        "linked-libraries": ["glfw", "glfw3"]
     },
 	"windows-x64" : {
         "linked-libraries": ["glfw"]
