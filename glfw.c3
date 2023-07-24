@@ -1,10 +1,10 @@
 module glfw;
 
-def WindowRef = void*;
-def Monitoref = void*;
+def GLFWwindow = void*;
+def GLFWmonitor = void*;
 def GLproc = void*;
-def KeyCallback = fn void(WindowRef window, int key, int scancode, int action, int mods);
-def MouseCallback = fn void(WindowRef window, int button, int action, int mods);
+def KeyCallback = fn void(GLFWwindow window, int key, int scancode, int action, int mods);
+def MouseCallback = fn void(GLFWwindow window, int button, int action, int mods);
 
 const GLFW_RELEASE = 0;
 const GLFW_PRESS = 1;
@@ -31,17 +31,16 @@ const OPENGL_FORWARD_COMPAT = 0x00022006;
 extern fn void init() @extern("glfwInit");
 extern fn void windowHint(int, int) @extern("glfwWindowHint");
 extern fn void pollEvents() @extern("glfwPollEvents");
-extern fn void swapBuffers(WindowRef window) @extern("glfwSwapBuffers");
-extern fn void destroyWindow(WindowRef window) @extern("glfwDestroyWindow");
-extern fn void makeContextCurrent(WindowRef window) @extern("glfwMakeContextCurrent");
-extern fn void getFramebufferSize(WindowRef window, int*, int*) @extern("glfwGetFramebufferSize");
+extern fn void swapBuffers(GLFWwindow window) @extern("glfwSwapBuffers");
+extern fn void destroyWindow(GLFWwindow window) @extern("glfwDestroyWindow");
+extern fn void makeContextCurrent(GLFWwindow window) @extern("glfwMakeContextCurrent");
+extern fn void getFramebufferSize(GLFWwindow window, int*, int*) @extern("glfwGetFramebufferSize");
 extern fn double getTime() @extern("glfwGetTime");
 extern fn void terminate() @extern("glfwTerminate");
 
-
 extern fn GLproc getProcAddress(char*) @extern("glfwGetProcAddress");
-extern fn bool windowShouldClose(WindowRef window) @extern("glfwWindowShouldClose");
-extern fn bool getCursorPos(WindowRef window, double* x_pos, double* y_pos) @extern("glfwGetCursorPos");
-extern fn void setKeyCallback(WindowRef window, KeyCallback* callback) @extern("glfwSetKeyCallback");
-extern fn void setMouseButtonCallback(WindowRef window, MouseCallback* callback) @extern("glfwSetMouseButtonCallback");
-extern fn Monitoref createWindow(int, int, char*, Monitoref, WindowRef) @extern("glfwCreateWindow");
+extern fn bool windowShouldClose(GLFWwindow window) @extern("glfwWindowShouldClose");
+extern fn bool getCursorPos(GLFWwindow window, double* x_pos, double* y_pos) @extern("glfwGetCursorPos");
+extern fn void setKeyCallback(GLFWwindow window, KeyCallback* callback) @extern("glfwSetKeyCallback");
+extern fn void setMouseButtonCallback(GLFWwindow window, MouseCallback* callback) @extern("glfwSetMouseButtonCallback");
+extern fn GLFWwindow createWindow(int, int, char*, GLFWmonitor, GLFWwindow) @extern("glfwCreateWindow");
