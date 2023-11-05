@@ -1,4 +1,5 @@
 module glfw;
+import std::io;
 
 EventHandler* handle;
 
@@ -7,6 +8,8 @@ struct EventHandler {
     double mouse_y_pos;
     double mouse_x_delta;
     double mouse_y_delta;
+    double scrollY;
+    bool scrolling;
     bool left_mouse_click;
     bool right_mouse_click;
     GLFWwindow window;
@@ -18,7 +21,13 @@ struct EventHandler {
 fn void EventHandler.init(&self) {
     setMouseButtonCallback(self.window, (MouseCallback*)&mouseEvents);
     setKeyCallback(self.window, (KeyCallback*)&keyboardEvents);
+    setScrollCallback(self.window, (ScrollCallback*)&scrollEvents);
     handle = self;
+}
+
+fn void scrollEvents(GLFWwindow window, double xoffset, double yoffset) {
+    handle.scrollY = yoffset;
+    handle.scrolling = true;
 }
 
 fn void mouseEvents(GLFWwindow window, int button, int action, int mods) {
@@ -39,17 +48,14 @@ fn void mouseEvents(GLFWwindow window, int button, int action, int mods) {
             handle.right_mouse_click = false;
         }
     }
-
-  /*  handle.on_mouse_event(handle);*/
 }
 
 fn void keyboardEvents(GLFWwindow window, int key, int scancode, int action, int mods) {
     handle.last_key = key;
-    /*handle.on_keyboard_event(handle, key);*/
 }
 
-
 fn void EventHandler.update(&self) {
+    self.scrolling = false;
     glfw::pollEvents();
     double x_local, y_local;
     getCursorPos(self.window, &x_local, &y_local);
