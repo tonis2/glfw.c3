@@ -1,5 +1,6 @@
 module glfw @if($feature(GLFW_VK));
 import vk;
+import std::collections::list;
 
 const VK_ENABLED = $feature(GLFW_VK);
 
@@ -14,4 +15,13 @@ fn vk::SurfaceKHR! createWindowSurface(vk::Instance instance, GLFWwindow *window
     }
 
     return surface;
+}
+
+fn ZStringList getRequiredExtensions() @if(VK_ENABLED) {
+    ZStringList extensions;
+    uint glfwExtensions_count = 0;
+    ZString* glfwExtensions = (ZString*)glfw::getRequiredInstanceExtensions(&glfwExtensions_count);
+    for (int i = 0; i < glfwExtensions_count; ++i) extensions.push(glfwExtensions[i]);
+
+    return extensions;
 }
