@@ -19,9 +19,9 @@ struct EventHandler {
 }
 
 fn void EventHandler.init(&self) {
-    setMouseButtonCallback(self.window, (MouseCallback*)&mouseEvents);
-    setKeyCallback(self.window, (KeyCallback*)&keyboardEvents);
-    setScrollCallback(self.window, (ScrollCallback*)&scrollEvents);
+    setMouseButtonCallback(self.window, (MouseCallback)&mouseEvents);
+    setKeyCallback(self.window, (KeyCallback)&keyboardEvents);
+    setScrollCallback(self.window, (ScrollCallback)&scrollEvents);
     handle = self;
 }
 

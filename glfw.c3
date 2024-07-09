@@ -6,7 +6,6 @@ def GLproc = void*;
 def KeyCallback = fn void(GLFWwindow window, int key, int scancode, int action, int mods);
 def MouseCallback = fn void(GLFWwindow window, int button, int action, int mods);
 def ScrollCallback = fn void(GLFWwindow window, int button, int action, int mods);
-def DropCallback = fn void(GLFWwindow window, int count, ZString paths);
 def MouseEvent = fn void(EventHandler*);
 def KeyboardEvent = fn void(EventHandler*, uint key);
 
@@ -57,10 +56,9 @@ extern fn void terminate() @extern("glfwTerminate");
 extern fn GLproc getProcAddress(char*) @extern("glfwGetProcAddress");
 extern fn bool windowShouldClose(GLFWwindow window) @extern("glfwWindowShouldClose");
 extern fn bool getCursorPos(GLFWwindow window, double* x_pos, double* y_pos) @extern("glfwGetCursorPos");
-extern fn void setKeyCallback(GLFWwindow window, KeyCallback* callback) @extern("glfwSetKeyCallback");
-extern fn void setMouseButtonCallback(GLFWwindow window, MouseCallback* callback) @extern("glfwSetMouseButtonCallback");
-extern fn void setScrollCallback(GLFWwindow window, MouseCallback* callback) @extern("glfwSetScrollCallback");
-extern fn void setDropCallback(GLFWwindow window, DropCallback* callback) @extern("glfwSetDropCallback");
+extern fn void setKeyCallback(GLFWwindow window, KeyCallback callback) @extern("glfwSetKeyCallback");
+extern fn void setMouseButtonCallback(GLFWwindow window, MouseCallback callback) @extern("glfwSetMouseButtonCallback");
+extern fn void setScrollCallback(GLFWwindow window, MouseCallback callback) @extern("glfwSetScrollCallback");
 extern fn GLFWwindow createWindow(int, int, char*, GLFWmonitor, GLFWwindow) @extern("glfwCreateWindow");
 
 extern fn char* getRequiredInstanceExtensions (uint *count) @extern("glfwGetRequiredInstanceExtensions");
